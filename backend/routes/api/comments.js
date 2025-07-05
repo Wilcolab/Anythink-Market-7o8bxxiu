@@ -12,17 +12,9 @@ router.get("/", async (req, res) => {
   }
 });
 
-// DELETE /api/comments/:id - delete a comment by ID
-router.delete("/:id", async (req, res) => {
-  try {
-    const deleted = await Comment.findByIdAndDelete(req.params.id);
-    if (!deleted) {
-      return res.status(404).json({ error: "Comment not found" });
-    }
-    res.json({ message: "Comment deleted" });
-  } catch (err) {
-    res.status(500).json({ error: "Failed to delete comment" });
-  }
+// GET /api/comments/pull-request - placeholder for pull request logic
+router.get("/pull-request", (req, res) => {
+  res.json({ message: "Pull request endpoint placeholder" });
 });
 
 module.exports = router;
