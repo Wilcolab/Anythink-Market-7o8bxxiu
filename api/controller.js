@@ -10,14 +10,21 @@ exports.calculate = function(req, res) {
     res.json({ error: err.message });
   });
 
-  // TODO: Add operator
+  // ✅ Step 1: Add power function
+  function power(base, exponent) {
+    return Math.pow(base, exponent);
+  }
+
+  // ✅ Step 2: Include it in operations map
   var operations = {
     'add':      function(a, b) { return Number(a) + Number(b) },
     'subtract': function(a, b) { return a - b },
     'multiply': function(a, b) { return a * b },
     'divide':   function(a, b) { return a / b },
+    'power':    power // <- Added!
   };
 
+  // ✅ Step 3: Validate and compute
   if (!req.query.operation) {
     throw new Error("Unspecified operation");
   }
@@ -40,5 +47,6 @@ exports.calculate = function(req, res) {
     throw new Error("Invalid operand2: " + req.query.operand2);
   }
 
+  // ✅ Step 4: Return result
   res.json({ result: operation(req.query.operand1, req.query.operand2) });
 };
